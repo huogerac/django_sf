@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      .container {
+        column-count: 3;
+      }
+      .title {
+        font-size: 4rem;
+        padding: 30px 0;
+      }
+      .img-palestra {
+        width: 100%;
+      }
+      .palestra {
+        text-align: center;
+        min-height: 640px;
+        padding: 20px;
+      }
+      .vs {
+        text-align: center;
+        padding-top: 140px;
+        min-height: 640px;
+      }
+      .center {
+        text-align: center;
+      }
+      .ma-3 {
+        margin: 20px;
+      }
+      .fixed {
+        position: fixed;
+        bottom: 10px;
+        width: 96%;
+      }
+      .button-63 {
+        align-items: center;
+        background-image: linear-gradient(
+          144deg,
+          #af40ff,
+          #5b42f3 50%,
+          #00ddeb
+        );
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        display: flex;
+        font-family: Phantomsans, sans-serif;
+        font-size: 20px;
+        justify-content: center;
+        line-height: 1em;
+        max-width: 100%;
+        min-width: 140px;
+        padding: 19px 24px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .button-63:active,
+      .button-63:hover {
+        outline: 0;
+      }
+
+      @media (min-width: 768px) {
+        .button-63 {
+          font-size: 24px;
+          min-width: 196px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="center title">Hora da Batalha</h1>
+    <div class="container">
+      <div class="palestra">
+        <h3>John Doe</h3>
+        <img
+          src="{% static 'palestras/imagens/avatar1.png' %}"
+          width="190"
+          alt=""
+        />
+        <h3>O Futuro do metaverso</h3>
+        <img
+          class="img-palestra"
+          src="{% static 'palestras/imagens/palestra1.jpg' %}"
+          alt=""
+        />
+      </div>
+      <div class="vs">
+        <img src="{% static 'palestras/imagens/vs.png' %}" width="120" alt="" />
+      </div>
+      <div class="palestra">
+        <h3>Erick Clapton</h3>
+        <img
+          src="{% static 'palestras/imagens/avatar1.png' %}"
+          width="190"
+          alt=""
+        />
+        <h3>Django e Realidade aumentada</h3>
+        <img
+          class="img-palestra"
+          src="{% static 'palestras/imagens/palestra2.jpg' %}"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="ma-3 fixed">
+      <a href="{% url 'palestras.pagina.votacao.concluida' %}" class="button-63"
+        >VOTAR</a
+      >
+    </div>
+  </body>
+</html>

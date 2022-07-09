@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      .container {
+        padding: 20px;
+        text-align: center;
+      }
+      .title {
+        font-size: 4rem;
+        padding: 30px 0;
+      }
+
+      .btn-link {
+        color: #fff;
+        padding: 18px;
+        font-size: 1.8rem;
+      }
+
+      .button-63 {
+        align-items: center;
+        background-image: linear-gradient(
+          144deg,
+          #af40ff,
+          #5b42f3 50%,
+          #00ddeb
+        );
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        display: flex;
+        font-family: Phantomsans, sans-serif;
+        font-size: 20px;
+        justify-content: center;
+        line-height: 1em;
+        max-width: 100%;
+        min-width: 140px;
+        padding: 19px 24px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .button-63:active,
+      .button-63:hover {
+        outline: 0;
+      }
+
+      @media (min-width: 768px) {
+        .button-63 {
+          font-size: 24px;
+          min-width: 196px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Votação concluída</h1>
+
+      <a href="{% url 'palestras.pagina.votacao' %}" class="button-63"
+        >Ver próxima batalha</a
+      >
+      <a class="btn-link" href="{% url 'palestras.pagina.eventos' %}"
+        >Parar com as batalhas</a
+      >
+    </div>
+  </body>
+</html>
