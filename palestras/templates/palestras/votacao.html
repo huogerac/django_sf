@@ -21,7 +21,10 @@
         color: #fff;
       }
       .container {
+        display: flex;
         column-count: 3;
+        justify-content: space-around;
+        align-items: flex-start;
       }
       .title {
         font-size: 4rem;
@@ -32,8 +35,15 @@
       }
       .palestra {
         text-align: center;
-        min-height: 640px;
+        min-height: 615px;
         padding: 20px;
+        padding-bottom: 10px;
+      }
+      .palestra:hover{
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        border: 5px solid #136497;
+        border-radius: 20%;
       }
       .vs {
         text-align: center;
@@ -42,6 +52,7 @@
       }
       .center {
         text-align: center;
+        position: relative;
       }
       .ma-3 {
         margin: 20px;
