@@ -1,4 +1,5 @@
 Django==4.0.6
+python-decouple==3.6
 asgiref==3.5.2
 sqlparse==0.4.2
 
