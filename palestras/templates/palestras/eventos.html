@@ -9,12 +9,17 @@
   <body>
     <h1>Próximos Eventos</h1>
     <ul>
-        {% for evento in eventos %}
-        <li>
-            <h3><a href="{% url 'palestras.pagina.votacao' %}">{{ evento.nome }}</a></h3>
-            <p>{{ evento.data }}</p>
-        </li>
-         {% endfor %}
+      {% for evento in eventos %}
+      <li>
+        <h3>
+          <a href="{% url 'palestras.pagina.votacao' %}">{{ evento.nome }}</a>
+        </h3>
+        <p>
+          <a href="{% url 'palestras.pagina.votacao.poc2' %}">Votação POC 2</a>
+        </p>
+        <p>{{ evento.data }}</p>
+      </li>
+      {% endfor %}
     </ul>
   </body>
 </html>

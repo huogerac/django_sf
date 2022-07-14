@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      .container {
+        background-color: #f2f2f2;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .palestra .imagem {
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+      }
+      .titulo {
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .palestra {
+        border-radius: 12px;
+        box-shadow: 0 5px 30px rgb(0 0 0 / 15%);
+        background-color: #fff;
+      }
+      .palestra-um {
+        margin-left: 20px;
+      }
+      .palestra-dois {
+        margin-right: 20px;
+      }
+      .avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .avatar .imagem {
+        width: 80px;
+      }
+      .avatar .imagem,
+      .avatar .autor {
+        padding: 8px;
+      }
+
+      .healthbar {
+        background-color: #f42126;
+        border-radius: 5px;
+        box-shadow: 0 0 0 1px #cccccc, 0 0 0 2px #e6e6e6, 0 0 0 3px white;
+        height: 4vw;
+        max-height: 5.125rem;
+      }
+      .healthbar__meter--player {
+        float: left;
+      }
+      .healthbar__meter {
+        background-color: #fff950;
+        border-radius: 5px;
+        height: 4vw;
+        max-height: 5.125rem;
+      }
+      .healthbar.left {
+        position: fixed;
+        top: 20px;
+        width: 35%;
+        left: 4%;
+      }
+      .healthbar.right {
+        position: fixed;
+        top: 20px;
+        width: 35%;
+        right: 4%;
+      }
+      .ma-3 {
+        margin: 20px;
+      }
+      .actions {
+        position: fixed;
+        bottom: 10px;
+        width: 96%;
+      }
+      .button-63 {
+        align-items: center;
+        background-image: linear-gradient(
+          144deg,
+          #af40ff,
+          #5b42f3 50%,
+          #00ddeb
+        );
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        display: flex;
+        font-family: Phantomsans, sans-serif;
+        font-size: 20px;
+        justify-content: center;
+        line-height: 1em;
+        max-width: 100%;
+        min-width: 140px;
+        padding: 19px 24px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .button-63:active,
+      .button-63:hover {
+        outline: 0;
+      }
+
+      @media (min-width: 768px) {
+        .button-63 {
+          font-size: 24px;
+          min-width: 196px;
+        }
+      }
+      .btn-block {
+        width: 100%;
+      }
+
+      .not-selected {
+        filter: opacity(0.3);
+      }
+      .btn-disabled {
+        filter: grayscale(0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="healthbar left">
+      <div
+        class="healthbar__meter healthbar__meter--player"
+        style="width: 10%"
+      ></div>
+    </div>
+    <div class="healthbar right">
+      <div
+        class="healthbar__meter healthbar__meter--player"
+        style="width: 10%"
+      ></div>
+    </div> -->
+
+    <div class="container">
+      <div class="palestra palestra-um" id="palestra-um">
+        <img
+          class="imagem"
+          src="{% static 'palestras/imagens/palestra1_520x320.png' %}"
+          alt=""
+        />
+        <h3 class="titulo">O Futuro do metaverso</h3>
+        <div class="avatar">
+          <img
+            class="imagem"
+            src="{% static 'palestras/imagens/avatar1.png' %}"
+            alt=""
+          />
+          <h3 class="autor">John Doe</h3>
+        </div>
+      </div>
+      <div>
+        <img src="{% static 'palestras/imagens/vs.png' %}" width="120" alt="" />
+      </div>
+      <div class="palestra palestra-dois" id="palestra-dois">
+        <img
+          class="imagem"
+          src="{% static 'palestras/imagens/palestra2_520x320.png' %}"
+          alt=""
+        />
+        <h3 class="titulo">O Futuro do metaverso</h3>
+        <div class="avatar">
+          <img
+            class="imagem"
+            src="{% static 'palestras/imagens/avatar2.png' %}"
+            alt=""
+          />
+          <h3 class="autor">John Doe</h3>
+        </div>
+      </div>
+    </div>
+    <div class="ma-3 actions">
+      <form action="{% url 'palestras.pagina.votacao.concluida' %}">
+        <button
+          class="button-63 btn-block btn-disabled"
+          id="btn-votar"
+          type="submit"
+          disabled
+        >
+          Votar
+        </button>
+      </form>
+    </div>
+
+    <script>
+      let btnVotar = document.getElementById("btn-votar");
+
+      let palestra1 = document.getElementById("palestra-um");
+      let palestra2 = document.getElementById("palestra-dois");
+
+      function escolhePalestraUm() {
+        btnVotar.disabled = false;
+        btnVotar.classList.remove("btn-disabled");
+        palestra1.classList.remove("not-selected");
+        palestra2.classList.add("not-selected");
+      }
+      function escolhePalestraDois() {
+        btnVotar.disabled = false;
+        btnVotar.classList.remove("btn-disabled");
+        palestra2.classList.remove("not-selected");
+        palestra1.classList.add("not-selected");
+      }
+
+      palestra1.addEventListener("click", escolhePalestraUm);
+      palestra2.addEventListener("click", escolhePalestraDois);
+    </script>
+  </body>
+</html>

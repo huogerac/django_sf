@@ -20,5 +20,8 @@ def pagina_eventos(request):
 def pagina_votacao(request):
     return render(request, 'palestras/votacao.html')
 
+def pagina_votacao_poc2(request):
+    return render(request, 'palestras/votacao_poc2.html')
+
 def pagina_concluida(request):
     return render(request, 'palestras/votacao_concluida.html')
