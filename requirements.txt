@@ -3,6 +3,9 @@ python-decouple==3.6
 asgiref==3.5.2
 sqlparse==0.4.2
 
-#Deploy
+# Deploy
 gunicorn==20.1.0
 whitenoise==6.2.0
+
+# Tools
+django-extensions==3.2.0
