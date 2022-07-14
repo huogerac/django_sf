@@ -160,43 +160,39 @@
 
     <div class="container">
       <div class="palestra palestra-um" id="palestra-um">
-        <img
-          class="imagem"
-          src="{% static 'palestras/imagens/palestra1_520x320.png' %}"
-          alt=""
-        />
-        <h3 class="titulo">O Futuro do metaverso</h3>
+        <input type="hidden" name="palestra1" value="{{ palestra1.id }}" id="palestra1">
+        <img class="imagem" src="{% static palestra1.imagem %}" alt="" />
+        <h3 class="titulo">{{ palestra1.titulo }}</h3>
         <div class="avatar">
           <img
             class="imagem"
-            src="{% static 'palestras/imagens/avatar1.png' %}"
+            src="{% static palestra1.autor.imagem %}"
             alt=""
           />
-          <h3 class="autor">John Doe</h3>
+          <h3 class="autor">{{ palestra1.autor.nome}}</h3>
         </div>
       </div>
       <div>
         <img src="{% static 'palestras/imagens/vs.png' %}" width="120" alt="" />
       </div>
       <div class="palestra palestra-dois" id="palestra-dois">
-        <img
-          class="imagem"
-          src="{% static 'palestras/imagens/palestra2_520x320.png' %}"
-          alt=""
-        />
-        <h3 class="titulo">O Futuro do metaverso</h3>
+        <input type="hidden" name="palestra2" value="{{ palestra2.id }}" id="palestra2">
+        <img class="imagem" src="{% static palestra2.imagem %}" alt="" />
+        <h3 class="titulo">{{ palestra2.titulo }}</h3>
         <div class="avatar">
           <img
             class="imagem"
-            src="{% static 'palestras/imagens/avatar2.png' %}"
+            src="{% static palestra2.autor.imagem %}"
             alt=""
           />
-          <h3 class="autor">John Doe</h3>
+          <h3 class="autor">{{ palestra2.autor.nome}}</h3>
+        </div>
         </div>
       </div>
     </div>
     <div class="ma-3 actions">
-      <form action="{% url 'palestras.pagina.votacao.concluida' %}">
+      <form method="POST" action="{% url 'palestras.pagina.votacao.concluida' %}">{% csrf_token %}
+        <input type="hidden" name="vencedora" id="vencedora" value="0">
         <button
           class="button-63 btn-block btn-disabled"
           id="btn-votar"
@@ -212,16 +208,21 @@
       let btnVotar = document.getElementById("btn-votar");
 
       let palestra1 = document.getElementById("palestra-um");
+      let palestra1Id = document.getElementById("palestra1");
       let palestra2 = document.getElementById("palestra-dois");
+      let palestra2Id = document.getElementById("palestra2");
+      let vencedora = document.getElementById("vencedora");
 
       function escolhePalestraUm() {
         btnVotar.disabled = false;
+        vencedora.value = palestra1Id.value;
         btnVotar.classList.remove("btn-disabled");
         palestra1.classList.remove("not-selected");
         palestra2.classList.add("not-selected");
       }
       function escolhePalestraDois() {
         btnVotar.disabled = false;
+        vencedora.value = palestra2Id.value;
         btnVotar.classList.remove("btn-disabled");
         palestra2.classList.remove("not-selected");
         palestra1.classList.add("not-selected");
