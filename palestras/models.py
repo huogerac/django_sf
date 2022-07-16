@@ -22,3 +22,18 @@ class Palestra(models.Model):
     descricao = models.TextField()
     imagem = models.URLField(max_length=1024)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Luta(models.Model):
+    paletra1 = models.ForeignKey(Palestra, on_delete=models.CASCADE, related_name='palestra1')
+    paletra2 = models.ForeignKey(Palestra, on_delete=models.CASCADE, related_name='palestra2')
+    data_inicio = models.DateTimeField(auto_now_add=True)
+    data_fim = models.DateTimeField(null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ticket = models.CharField(max_length=64, null=True, blank=True)
+
+
+class Vitorias(models.Model):
+    paletra = models.ForeignKey(Palestra, on_delete=models.CASCADE)
+    data = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
