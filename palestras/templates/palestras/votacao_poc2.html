@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'palestras/css/magic.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
     <style>
       * {
         margin: 0;
@@ -136,12 +138,107 @@
         width: 100%;
       }
 
-      .not-selected {
-        filter: opacity(0.3);
+      .palestra.selected {
+        box-shadow: -10px 0 80px #7f6aca, 10px 0 80px #0ff;
+      }
+
+      .palestra.not-selected {
+        filter: opacity(0.7);
       }
       .btn-disabled {
         filter: grayscale(0.8);
       }
+
+      .super-blur {
+        filter: blur(10px);
+      }
+      .palestra-texto {
+        position: fixed;
+        top: 20px;
+        margin: 16px;
+        padding: 16px;
+        width: 45%;
+        height: 80vh;
+        background: white;
+        color: #505050;
+        font-size: 1.4rem;
+        border-radius: 12px;
+        z-index: 2;
+      }
+      .palestra-texto.hidden {
+        display: none;
+      }
+
+      .palestra-texto.texto-right {
+        right: 20px;
+      }
+      .palestra .palestra-actions {
+          text-align: center;
+          padding: 8px;
+      }
+      .center {
+        text-align: center;
+      }
+
+      .palestra button,
+      .palestra-container button {
+          text-transform: uppercase;
+          border: none;
+          padding: 8px;
+          border-radius: 8px;
+          color: #5f5f5f;
+          cursor: pointer;
+      }
+
+    </style>
+    <!-- toast-->
+    <style>
+    /* source: https://codepen.io/vangato/pen/jOEEEmm */
+    #simpleToast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: MediumVioletRed;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 45%;
+      top: 30px;
+      font-family: monospace;
+      font-size: 1.2rem;
+      display: inline-flex;
+      line-height: 12px;
+    }
+    #simpleToast span {
+      margin-left: 12px;
+      margin-top: 2px;
+    }
+    #simpleToast.show {
+      visibility: visible; /* Show the SIMPLE-TOAST */
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+      from {top: 0; opacity: 0;}
+      to {top: 30px; opacity: 1;}
+    }
+    @keyframes fadein {
+      from {top: 0; opacity: 0;}
+      to {top: 30px; opacity: 1;}
+    }
+    @-webkit-keyframes fadeout {
+      from {top: 30px; opacity: 1;}
+      to {top: 0; opacity: 0;}
+    }
+    @keyframes fadeout {
+      from {top: 30px; opacity: 1;}
+      to {top: 0; opacity: 0;}
+    }
+
     </style>
   </head>
   <body>
@@ -158,12 +255,41 @@
       ></div>
     </div> -->
 
+    <!--  -->
+    <div class="palestra-texto hidden" id="palestra-um-texto">
+      <div class="palestra-container">
+        <p class="center">
+          <button id="btn-fechar-texto1">Fechar</button>
+        </p>
+        <h3>Palestra</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit harum ipsam laboriosam libero. Ad, obcaecati. Rerum eveniet soluta corrupti architecto excepturi. Ex illum error earum dignissimos libero unde? Soluta, sit.</p>
+        <h3>Autor</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae architecto assumenda ea. Veniam, exercitationem vel officia minus dolorem ipsum neque esse ab quod vitae? Dignissimos molestias eius vel culpa dolores.</p>
+      </div>
+    </div>
+
+    <div class="palestra-texto texto-right hidden" id="palestra-dois-texto">
+      <div class="palestra-container">
+        <p class="center">
+          <button id="btn-fechar-texto2">Fechar</button>
+        </p>
+        <h3>Palestra 2</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit harum ipsam laboriosam libero. Ad, obcaecati. Rerum eveniet soluta corrupti architecto excepturi. Ex illum error earum dignissimos libero unde? Soluta, sit.</p>
+        <h3>Autor 2</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae architecto assumenda ea. Veniam, exercitationem vel officia minus dolorem ipsum neque esse ab quod vitae? Dignissimos molestias eius vel culpa dolores.</p>
+      </div>
+    </div>
+
+    <div id="simpleToast">
+      <span><i class="fa-solid fa-arrow-pointer"></i> Clique 2x para escolher a vencedora!</span>
+    </div>
+
     <div class="container">
-      <div class="palestra palestra-um" id="palestra-um">
+      <div class="palestra palestra-um not-selected" id="palestra-um">
         <input type="hidden" name="palestra1" value="{{ palestra1.id }}" id="palestra1">
         <img class="imagem" src="{% static palestra1.imagem %}" alt="" />
         <h3 class="titulo">{{ palestra1.titulo }}</h3>
-        <div class="avatar">
+        <div class="avatar" id="palestra1-avatar">
           <img
             class="imagem"
             src="{% static palestra1.autor.imagem %}"
@@ -171,22 +297,27 @@
           />
           <h3 class="autor">{{ palestra1.autor.nome}}</h3>
         </div>
+        <div class="palestra-actions">
+          <button id="btn-palestra1-texto">Mais informações</button>
+        </div>
       </div>
       <div>
         <img src="{% static 'palestras/imagens/vs.png' %}" width="120" alt="" />
       </div>
-      <div class="palestra palestra-dois" id="palestra-dois">
+      <div class="palestra palestra-dois not-selected" id="palestra-dois">
         <input type="hidden" name="palestra2" value="{{ palestra2.id }}" id="palestra2">
         <img class="imagem" src="{% static palestra2.imagem %}" alt="" />
         <h3 class="titulo">{{ palestra2.titulo }}</h3>
-        <div class="avatar">
+        <div class="avatar" id="palestra2-avatar">
           <img
-            class="imagem"
+            class="imagem "
             src="{% static palestra2.autor.imagem %}"
             alt=""
           />
           <h3 class="autor">{{ palestra2.autor.nome}}</h3>
         </div>
+        <div class="palestra-actions">
+          <button id="btn-palestra2-texto">Mais informações</button>
         </div>
       </div>
     </div>
@@ -205,6 +336,25 @@
     </div>
 
     <script>
+
+      function exibeAjuda(el) {
+        // Evita ficar exibindo toda hora
+        if (el.classList.value.indexOf("ajuda") != -1) {
+          return ;
+        }
+        var x = document.getElementById("simpleToast");
+        x.className = "show";
+        setTimeout(function(){
+          x.className = x.className.replace("show", "");
+          el.classList.add("ajuda");
+        }, 3000);
+      }
+      function escondeAjuda() {
+        var x = document.getElementById("simpleToast");
+        x.className = "";
+      }
+
+      let container = document.getElementsByClassName("container")[0];
       let btnVotar = document.getElementById("btn-votar");
 
       let palestra1 = document.getElementById("palestra-um");
@@ -213,23 +363,96 @@
       let palestra2Id = document.getElementById("palestra2");
       let vencedora = document.getElementById("vencedora");
 
+      palestra1.classList.add("magictime", "tinUpIn");
+      palestra2.classList.add("magictime", "tinUpIn");
+
+      function selecionaPalestraUm() {
+        palestra1.classList.remove("not-selected");
+        palestra2.classList.add("not-selected");
+        exibeAjuda(palestra1);
+      }
+      function selecionaPalestraDois() {
+        palestra2.classList.remove("not-selected");
+        palestra1.classList.add("not-selected");
+        exibeAjuda(palestra2);
+      }
+
       function escolhePalestraUm() {
+        escondeAjuda();
         btnVotar.disabled = false;
         vencedora.value = palestra1Id.value;
         btnVotar.classList.remove("btn-disabled");
-        palestra1.classList.remove("not-selected");
+        palestra1.classList.remove("not-selected", "magictime", "tinUpIn");
+        palestra1.classList.add("selected");
         palestra2.classList.add("not-selected");
+        palestra2.classList.remove("selected");
+
+        document.getElementById("palestra1-avatar").classList.add("shake-opacity", "shake-constant");
+        setTimeout(() => {
+          document.getElementById("palestra1-avatar").classList.remove("shake-opacity", "shake-constant");
+        }, 1100)
       }
       function escolhePalestraDois() {
+        escondeAjuda();
         btnVotar.disabled = false;
         vencedora.value = palestra2Id.value;
         btnVotar.classList.remove("btn-disabled");
-        palestra2.classList.remove("not-selected");
+        palestra2.classList.remove("not-selected", "magictime", "tinUpIn");
+        palestra2.classList.add("selected");
         palestra1.classList.add("not-selected");
+        palestra1.classList.remove("selected");
+
+        document.getElementById("palestra2-avatar").classList.add("shake-opacity", "shake-constant");
+        setTimeout(() => {
+          document.getElementById("palestra2-avatar").classList.remove("shake-opacity", "shake-constant");
+        }, 1100)
       }
 
-      palestra1.addEventListener("click", escolhePalestraUm);
-      palestra2.addEventListener("click", escolhePalestraDois);
+      palestra1.addEventListener("dblclick", escolhePalestraUm);
+      palestra2.addEventListener("dblclick", escolhePalestraDois);
+
+      palestra1.addEventListener("click", selecionaPalestraUm);
+      palestra2.addEventListener("click", selecionaPalestraDois);
+
+      function  mostraTexto1() {
+        let texto1 = document.getElementById("palestra-um-texto")
+        texto1.classList.remove('hidden', 'magictime', 'slideUpReturn');
+        texto1.classList.add('magictime', 'slideUpReturn');
+        container.classList.add('super-blur');
+      }
+
+      let btnTexto1 = document.getElementById("btn-palestra1-texto");
+      btnTexto1.addEventListener("click", mostraTexto1);
+
+      function fecharTexto1() {
+        let texto1 = document.getElementById("palestra-um-texto");
+        texto1.classList.add('hidden');
+        container.classList.remove('super-blur');
+      }
+      let btnFecharTexto1 = document.getElementById("btn-fechar-texto1");
+      btnFecharTexto1.addEventListener("click", fecharTexto1);
+
+
+      function  mostraTexto2() {
+        let texto2 = document.getElementById("palestra-dois-texto")
+        texto2.classList.remove('hidden', 'magictime', 'slideUpReturn');
+        texto2.classList.add('magictime', 'slideUpReturn');
+        container.classList.add('super-blur');
+      }
+
+      let btnTexto2 = document.getElementById("btn-palestra2-texto");
+      btnTexto2.addEventListener("click", mostraTexto2);
+
+      function fecharTexto2() {
+        let texto2 = document.getElementById("palestra-dois-texto");
+        texto2.classList.add('hidden');
+        container.classList.remove('super-blur');
+      }
+      let btnFecharTexto2 = document.getElementById("btn-fechar-texto2");
+      btnFecharTexto2.addEventListener("click", fecharTexto2);
+
+
+
     </script>
   </body>
 </html>
