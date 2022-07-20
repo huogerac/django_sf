@@ -261,10 +261,10 @@
         <p class="center">
           <button id="btn-fechar-texto1">Fechar</button>
         </p>
-        <h3>Palestra</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit harum ipsam laboriosam libero. Ad, obcaecati. Rerum eveniet soluta corrupti architecto excepturi. Ex illum error earum dignissimos libero unde? Soluta, sit.</p>
-        <h3>Autor</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae architecto assumenda ea. Veniam, exercitationem vel officia minus dolorem ipsum neque esse ab quod vitae? Dignissimos molestias eius vel culpa dolores.</p>
+        <h3>{{ palestra1.titulo }}</h3>
+        <p>{{ palestra1.descricao }}</p>
+        <h3>{{ palestra1.autor.nome }}</h3>
+        <p>{{ palestra1.autor.profile.bio }}</p>
       </div>
     </div>
 
@@ -273,10 +273,10 @@
         <p class="center">
           <button id="btn-fechar-texto2">Fechar</button>
         </p>
-        <h3>Palestra 2</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit harum ipsam laboriosam libero. Ad, obcaecati. Rerum eveniet soluta corrupti architecto excepturi. Ex illum error earum dignissimos libero unde? Soluta, sit.</p>
-        <h3>Autor 2</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae architecto assumenda ea. Veniam, exercitationem vel officia minus dolorem ipsum neque esse ab quod vitae? Dignissimos molestias eius vel culpa dolores.</p>
+        <h3>{{ palestra2.titulo }}</h3>
+        <p>{{ palestra2.descricao }}</p>
+        <h3>{{ palestra2.autor.nome }}</h3>
+        <p>{{ palestra2.autor.profile.bio }}</p>
       </div>
     </div>
 
@@ -292,7 +292,7 @@
         <div class="avatar" id="palestra1-avatar">
           <img
             class="imagem"
-            src="{% static palestra1.autor.imagem %}"
+            src="{% static palestra1.autor.profile.imagem %}"
             alt=""
           />
           <h3 class="autor">{{ palestra1.autor.nome}}</h3>
@@ -311,7 +311,7 @@
         <div class="avatar" id="palestra2-avatar">
           <img
             class="imagem "
-            src="{% static palestra2.autor.imagem %}"
+            src="{% static palestra2.autor.profile.imagem %}"
             alt=""
           />
           <h3 class="autor">{{ palestra2.autor.nome}}</h3>

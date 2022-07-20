@@ -31,26 +31,34 @@ def pagina_votacao(request):
         {
             "id": 1,
             "nome": "Lu Mastercard",
-            "bio": "Lorem ipsum dolor sit and elit Voluptas",
-            "imagem": "palestras/imagens/avatar1.png",
+            "profile": {
+                "bio": "Lorem ipsum dolor sit and elit Voluptas",
+                "imagem": "palestras/imagens/avatar1.png",
+            }
         },
         {
             "id": 2,
             "nome": "Enza Pascal",
-            "bio": "Lorem ipsum more detail Lups dolor sit and elit Voluptas",
-            "imagem": "palestras/imagens/avatar2.png",
+            "profile": {
+                "bio": "Lorem ipsum more detail Lups dolor sit and elit Voluptas",
+                "imagem": "palestras/imagens/avatar2.png",
+            }
         },
         {
             "id": 3,
             "nome": "Pedrão Paulo",
-            "bio": "404",
-            "imagem": "palestras/imagens/avatar3.png",
+            "profile": {
+                "bio": "404",
+                "imagem": "palestras/imagens/avatar3.png",
+            }
         },
         {
             "id": 4,
             "nome": "Liz Laz",
-            "bio": "404",
-            "imagem": "palestras/imagens/avatar4.png",
+            "profile": {
+                "bio": "404",
+                "imagem": "palestras/imagens/avatar4.png",
+            }
         },
     ]
     palestras = [
