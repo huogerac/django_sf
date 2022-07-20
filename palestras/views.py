@@ -18,13 +18,14 @@ def pagina_eventos(request):
     }
     return render(request, 'palestras/eventos.html', context)
 
-def pagina_votacao(request):
+def pagina_votacao_poc1(request):
     """
     Deve escolher 2 palestras para deixar o usuário escolher qual é a melhor!
     """
     return render(request, 'palestras/votacao.html')
 
-def pagina_votacao_poc2(request):
+
+def pagina_votacao(request):
     """ cópia da pagina_votacao com um style diferente"""
     autores = [
         {
@@ -96,6 +97,7 @@ def pagina_votacao_poc2(request):
         "palestra2": palestra2,
     }
     return render(request, 'palestras/votacao_poc2.html', context)
+
 
 def pagina_concluida(request):
     id_vencedora = request.POST.get("vencedora")
