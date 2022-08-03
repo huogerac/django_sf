@@ -92,3 +92,9 @@ body {
 .centralize--text {
   text-align: center !important;
 }
+
+div .btn-link {
+  color: #6324f6;
+  font-weight: 700;
+  text-decoration: none;
+}
